@@ -21,4 +21,14 @@ public class PlaylistDTO {
 
     @NotBlank
     private String description;
+
+    @Override
+    public String toString() {
+        return "PlaylistDTO{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
 }

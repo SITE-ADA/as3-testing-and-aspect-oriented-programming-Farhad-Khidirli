@@ -49,11 +49,6 @@ public class PlaylistController {
         playlistService.delete(id);
     }
 
-    @GetMapping("/add")
-    public String addPlaylist(Model model) {
-        model.addAttribute("playlist", new PlaylistDTO());
-        return "playlist_dir/add";
-    }
 
     @PostMapping("/")
     public ResponseEntity<PlaylistDTO> savePlaylist(@Valid @RequestBody PlaylistDTO playlistDTO) {
