@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -92,5 +93,35 @@ public class PlaylistServiceImpl implements PlaylistService {
         LOGGER.info("Saved playlist with id {} in {}ms. Saved playlist data: {}", savedPlaylistDTO.getId(), endTime - startTime, savedPlaylistDTO);
         return savedPlaylistDTO;
     }
+
+    @Override
+    public PlaylistDTO patch(Long id, Map<String, Object> updates) {
+        LOGGER.info("Patching playlist with id {} with updates {}", id, updates);
+        long startTime = System.currentTimeMillis();
+
+        Optional<Playlist> playlistOptional = playlistRepository.findById(id);
+        if (playlistOptional.isPresent()) {
+            Playlist playlist = playlistOptional.get();
+            for (Map.Entry<String, Object> entry : updates.entrySet()) {
+                String key = entry.getKey();
+                Object value = entry.getValue();
+                switch (key) {
+                    case "name" -> playlist.setName((String) value);
+                    case "description" -> playlist.setDescription((String) value);
+                }
+            }
+            Playlist savedPlaylist = playlistRepository.save(playlist);
+            PlaylistDTO playlistDTO = playlistMapper.toDto(savedPlaylist);
+
+            long endTime = System.currentTimeMillis();
+            LOGGER.info("Patched playlist with id {} in {}ms. Patched playlist data: {}", id, endTime - startTime, playlistDTO);
+            return playlistDTO;
+
+        } else {
+            LOGGER.warn("Failed to patch playlist with id {} because it does not exist", id);
+            return null;
+        }
+    }
+
 
 }
