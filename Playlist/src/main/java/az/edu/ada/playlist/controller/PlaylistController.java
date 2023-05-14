@@ -2,6 +2,7 @@ package az.edu.ada.playlist.controller;
 
 import az.edu.ada.playlist.entity.dto.PlaylistDTO;
 import az.edu.ada.playlist.service.PlaylistService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -48,13 +49,13 @@ public class PlaylistController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<PlaylistDTO> savePlaylist(@RequestBody PlaylistDTO playlistDTO) {
+    public ResponseEntity<PlaylistDTO> savePlaylist(@Valid @RequestBody PlaylistDTO playlistDTO) {
         PlaylistDTO savedPlaylistDTO = playlistService.save(playlistDTO);
         return ResponseEntity.created(URI.create("/" + savedPlaylistDTO.getId())).body(savedPlaylistDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PlaylistDTO> updatePlaylist(@PathVariable("id") Long id, @RequestBody PlaylistDTO playlistDTO) {
+    public ResponseEntity<PlaylistDTO> updatePlaylist(@PathVariable("id") Long id, @Valid @RequestBody PlaylistDTO playlistDTO) {
         PlaylistDTO updatedPlaylistDTO = playlistService.update(id, playlistDTO);
         return ResponseEntity.ok(updatedPlaylistDTO);
     }
