@@ -1,9 +1,6 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/3fWo0lBx)
-<h1> Assignment 3 </h1>
-<h3> Testing and AOP. </h3>
+# Testing and AOP.
 
-
-## Installation
+### Installation
 
 --- Clone the repository to your local machine.
 --- Install the required dependencies using Maven.
@@ -31,6 +28,6 @@
 --- Log a message after each method is executed in the Service class(es) with the information about the execution time
 
 
-## Video Demonstration  ✅
+### Video Demonstration  ✅
 
 Please refer to the following [video](https://youtu.be/DLa4Co6cb0c) for a short demo of the application and its features.
